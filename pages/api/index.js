@@ -1,13 +1,9 @@
 import nextConnect from 'next-connect';
+import handler from '../../src/handler'
 
-export default nextConnect({
-  onNoMatch(req, res) {
-    return res.status(400).json({ success: false });
-  }
+export default handler.get((req, res) => {
+  return res.status(200).json({ success: true, msg: 'API up and running' })
 })
-  .get((req, res) => {
-    res.send('API up and running');
-    res.end();
-  }).post((req, res) => {
+  .post((req, res) => {
     throw new Error('Server error');
   })
