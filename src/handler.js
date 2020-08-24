@@ -1,4 +1,5 @@
 import nextConnect from 'next-connect';
+import 'colors';
 
 export default nextConnect({
     onError(err, req, res, next) {
@@ -7,4 +8,7 @@ export default nextConnect({
     onNoMatch(req, res) {
         return res.status(400).json({ success: false });
     }
-})
+}).use((req, res, next) => {
+    console.log(`Middleware ran ${Date.now()}`.green.bold);
+    next();
+});
